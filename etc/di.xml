@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Log billing address input data -->
+    <type name="Magento\Webapi\Controller\Rest\InputParamsResolver">
+        <plugin name="mageworx_checkout_logger_log_billing_address_input"
+                type="MageWorx\CheckoutLogger\Plugin\LogBillingAddressInput"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+    <!-- Log billing address removing -->
+    <type name="\Magento\Quote\Api\Data\CartInterface">
+        <plugin name="mageworx_checkout_logger_log_remove_address"
+                type="MageWorx\CheckoutLogger\Plugin\LogRemoveAddressFromQuote"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+    <!-- Log address save -->
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="mageworx_checkout_logger_log_address_on_save"
+                type="MageWorx\CheckoutLogger\Plugin\LogAddressOnSave"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+</config>
